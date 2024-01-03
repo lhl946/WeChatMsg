@@ -20,7 +20,8 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/christmas")
+# @app.route("/christmas")
+@app.route("/newyear")
 def christmas():
     # 渲染模板，并传递图表的 HTML 到模板中
     try:
@@ -50,6 +51,7 @@ def christmas():
             label = key
     latest_dialog = msg_db.get_latest_time_of_message(contact.wxid, year_='2023')
     latest_time = latest_dialog[0][2] if latest_dialog else ''
+    print('latest_time', latest_time)
     time_data = {
         'latest_time': latest_time,
         'latest_time_dialog': latest_dialog,
@@ -57,6 +59,7 @@ def christmas():
         'chat_time': chat_time,
         'chat_time_num': num,
     }
+    print('time_data', time_data)
     month_data = msg_db.get_messages_by_month(contact.wxid, True, year_='2023')
 
     if month_data:
